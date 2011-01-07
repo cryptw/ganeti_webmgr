@@ -101,8 +101,7 @@ def reinstall(request, cluster_slug, instance):
     # so use that for now.
     if not (
         user.is_superuser or
-        user.has_perm("remove", instance) or
-        user.has_perm("admin", instance) or
+        user.has_any_perms(instance, ["remove", "admin"]) or
         user.has_perm("admin", instance.cluster)
         ):
         return render_403(request, 'You do not have sufficient privileges')
