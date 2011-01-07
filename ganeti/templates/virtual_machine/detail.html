@@ -66,7 +66,7 @@
             {% endifnotequal %}
         {% endif %}
         
-        $("#actions a").not('.delete').click(function() {
+        $("#actions a").not('.delete').not('.reinstall').click(function() {
             if (actions_enabled){
                 if ((this.className == 'button shutdown' || this.className == 'button reboot')
                     && !(confirm('Are you sure you want to ' + this.title + '?'))) {
@@ -209,6 +209,7 @@
                     <li><a class="button reboot" title="reboot" href="{% url instance-reboot cluster.slug instance.hostname %}">Reboot</a></li>
                     {% else %}
                     <li><a class="button startup" href="{% url instance-startup cluster.slug instance.hostname %}">Start</a></li>
+                    <li><a class="button reinstall" href="{% url instance-reinstall cluster.slug instance.hostname %}">Reinstall</a></li>
                     {% endifequal %}
                 {% endif %}
             {% endwith %}
